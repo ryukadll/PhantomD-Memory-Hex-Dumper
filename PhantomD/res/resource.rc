@@ -1,0 +1,6 @@
+/* resource.rc — PhantomD application resources */
+#include <windows.h>
+#include "../include/resource.h"
+
+IDI_APPICON ICON "phantomd.ico"
+1           ICON "phantomd.ico"
