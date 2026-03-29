@@ -1,15 +1,3 @@
-# =============================================================================
-#  PhantomD — Memory Hex Dumper
-#  Makefile (MinGW / w64devkit)
-#
-#  Usage:
-#    make              — debug + release build
-#    make release      — optimised release build  → build/PhantomD.exe
-#    make debug        — debug build              → build/PhantomD_d.exe
-#    make clean        — remove all build artefacts
-#    make help         — print this message
-# =============================================================================
-
 TARGET_REL = build/PhantomD.exe
 TARGET_DBG = build/PhantomD_d.exe
 
@@ -31,7 +19,6 @@ SRCS = $(SRC_DIR)/main.c     \
 OBJS_REL = $(patsubst $(SRC_DIR)/%.c, $(BLD_DIR)/%.o,      $(SRCS))
 OBJS_DBG = $(patsubst $(SRC_DIR)/%.c, $(BLD_DIR)/%_d.o,    $(SRCS))
 
-# Common flags
 CFLAGS_COMMON = \
     -Wall -Wextra -Wno-unused-parameter -Wno-unknown-pragmas \
     -std=c11 \
@@ -50,12 +37,10 @@ LIBS    = -lgdiplus -lcomctl32 -lcomdlg32 -lmsimg32 \
 
 RES_OBJ = $(BLD_DIR)/resource.o
 
-# =============================================================================
 .PHONY: all release debug clean help
 
 all: release
 
-# --- Release -----------------------------------------------------------------
 release: $(BLD_DIR) $(TARGET_REL)
 	@echo [PhantomD] Release build complete: $(TARGET_REL)
 
@@ -65,7 +50,6 @@ $(TARGET_REL): $(OBJS_REL) $(RES_OBJ)
 $(BLD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS_REL) -c -o $@ $<
 
-# --- Debug -------------------------------------------------------------------
 debug: $(BLD_DIR) $(TARGET_DBG)
 	@echo [PhantomD] Debug build complete: $(TARGET_DBG)
 
@@ -75,19 +59,15 @@ $(TARGET_DBG): $(OBJS_DBG) $(RES_OBJ)
 $(BLD_DIR)/%_d.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS_DBG) -c -o $@ $<
 
-# --- Resources ---------------------------------------------------------------
 $(RES_OBJ): $(RES_DIR)/resource.rc $(RES_DIR)/phantomd.ico
 	$(WINDRES) --include-dir $(RES_DIR) $< -O coff -o $@
 
-# --- Directories -------------------------------------------------------------
 $(BLD_DIR):
 	mkdir -p $(BLD_DIR)
 
-# --- Clean -------------------------------------------------------------------
 clean:
 	rm -f $(BLD_DIR)/*.o $(TARGET_REL) $(TARGET_DBG)
 
-# --- Help --------------------------------------------------------------------
 help:
 	@echo "PhantomD build targets:"
 	@echo "  make            release build  -> build/PhantomD.exe"
