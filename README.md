@@ -108,15 +108,6 @@ PhantomD/
 
 ---
 
-## Shortcuts
-
-| Shortcut | Action              |
-| -------- | ------------------- |
-| Ctrl + G | Jump to address     |
-| Ctrl + C | Copy hex dump       |
-| F5       | Refresh memory view |
-
----
 
 ## Disclaimer
 
