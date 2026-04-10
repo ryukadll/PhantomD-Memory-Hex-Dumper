@@ -6,7 +6,7 @@
 
 ## Features
 
-* **Process Memory Inspection**
+* **Process Memory Inspection** 
 
   * Attach to running processes
   * Enumerate and browse memory regions
